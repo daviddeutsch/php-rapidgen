@@ -1,0 +1,19 @@
+{
+	"name":              "daviddeutsch/php-rapidgen",
+	"description":       "A fast PHP code generator from concise templates.",
+	"authors":           [
+		{
+			"name":     "David Deutsch",
+			"email":    "skore@valanx.org",
+			"homepage": "http://valanx.org",
+			"role":     "Chief Botanist"
+		}
+	],
+	"keywords":          [],
+	"license":           "GPL-3.0+",
+	"minimum-stability": "dev",
+	"require":           {
+		"xamin/handlebars.php": "dev-master",
+		"nikic/php-parser":     "dev-master"
+	}
+}
