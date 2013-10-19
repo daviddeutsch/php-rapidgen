@@ -7,28 +7,26 @@ abstract class AbstractParser
 	public static $template;
 	public static $helper;
 
-	public static $options = [];
+	private static $options = [];
 
-	public static function configure( $options=[] )
+	public function __construct( $options=[] )
 	{
-		$opts = self::$options;
-
 		if ( !empty( $options ) ) {
 			foreach ( $options as $k => $v ) {
-				$opts[$k] = $v;
+				self::$options[$k] = $v;
 			}
 		}
 
-		self::$template = new $opts['template_class'];
-		self::$helper   = new $opts['helper_class'];
+		self::$template = new self::$options['template_class']();
+		self::$helper   = new self::$options['helper_class']();
 	}
 
-	public static function parse( $nodeset )
+	public function parse( $nodeset )
 	{
 		if ( is_array($nodeset) ) {
 			$array = [];
 			foreach ( $nodeset as $node ) {
-				$array[] = self::parse($node);
+				$array[] = $this->parse($node);
 			}
 
 			return $array;
@@ -38,10 +36,10 @@ abstract class AbstractParser
 			return $nodeset;
 		}
 
-		return self::node( $nodeset );
+		return $this->node( $nodeset );
 	}
 
-	public static function node( $input )
+	private function node( $input )
 	{
 		return (string) $input;
 	}

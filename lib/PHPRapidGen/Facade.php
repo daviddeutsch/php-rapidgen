@@ -4,6 +4,17 @@ namespace PHPRapidGen;
 
 class Facade
 {
+	private static $parsers;
+
+	static function configure()
+	{
+		self::$parsers = (object) [
+			'phpp' => new Parser\PHPParser(),
+			'sphpp' => new Parser\SlimPHPParser(),
+			'hb' => new Parser\Handlebars()
+		];
+	}
+
 	static function context( $context )
 	{
 

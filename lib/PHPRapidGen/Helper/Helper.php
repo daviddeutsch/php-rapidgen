@@ -1,19 +1,10 @@
 <?php
 
-namespace PHPRapidGen;
+namespace PHPRapidGen\Helper;
 
-class Helper
+class Basic extends AbstractHelper
 {
-	public static function __callStatic( $name, $args )
-	{
-		if ( method_exists( __CLASS__, $name ) ) {
-			call_user_func( array( 'self', $name ), $args[0] );
-		} elseif ( method_exists( __CLASS__, '_'.$name ) ) {
-			call_user_func( array( 'self', '_'.$name ), $args[0] );
-		}
-	}
-
-	private static function _array( $input )
+	private function _array( $input )
 	{
 		if (is_object($input)) {
 			$input = get_object_vars($input);
@@ -41,8 +32,12 @@ class Helper
 		return '{"Array":[['.implode(',',$array)."]]}";
 	}
 
-	private static function docbloc( $input )
+	private function docbloc( $input )
 	{
+		if (is_object($input)) {
+			$input = get_object_vars($input);
+		}
+
 		if (!is_array($input) && !($input instanceof \Traversable)) {
 			return '';
 		}
@@ -55,7 +50,7 @@ class Helper
 		return '{"Comment_Doc":["'."/**\n".implode("\n",$lines)."\n */".'"]}';
 	}
 
-	private static function concat( $input )
+	private function concat( $input )
 	{
 		return implode($input);
 	}
