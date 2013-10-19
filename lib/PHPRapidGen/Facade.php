@@ -9,9 +9,9 @@ class Facade
 	static function configure()
 	{
 		self::$parsers = (object) [
-			'phpp' => new Parser\PHPParser(),
-			'sphpp' => new Parser\SlimPHPParser(),
-			'hb' => new Parser\Handlebars()
+			'php' => new Parser\PHPParser(),
+			'json' => new Parser\SlimPHPParser(),
+			'handlebars' => new Parser\Handlebars()
 		];
 	}
 
@@ -22,19 +22,13 @@ class Facade
 
 	static function generate( $source, $target )
 	{
-		$class = 'Parser\\';
+		$extension = pathinfo($source, PATHINFO_EXTENSION);
 
-		if ( file_exists($source.'/root.php') ) {
-			$class .= 'PHPParser';
-		} elseif ( file_exists($source.'/root.json') ) {
-			$class .= 'SlimPHPParser';
-		} elseif ( file_exists($source.'/root.handlebars') ) {
-			$class .= 'Handlebars';
+		if ( !isset(self::$parsers[$extension]) ) {
+			return null;
 		}
 
-		$parser = new $class;
-
-		$parser->parse();
+		self::$parsers[$extension]->parse( $source );
 	}
 
 	static function parser( $type, $source )

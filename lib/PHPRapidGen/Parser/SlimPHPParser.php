@@ -2,7 +2,7 @@
 
 namespace PHPRapidGen\Parser;
 
-class PHPParser extends AbstractParser
+class SlimPHPParser extends AbstractParser
 {
 	private static $types = [
 		's' =>  'Scalar',
