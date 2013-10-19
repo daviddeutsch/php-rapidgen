@@ -1,6 +1,8 @@
 <?php
 
-class PHPParser_Node_Template
+namespace PHPRapidGen;
+
+class Template
 {
 	static $path;
 
