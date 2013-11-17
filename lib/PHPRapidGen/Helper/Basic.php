@@ -6,24 +6,26 @@ class Basic extends AbstractHelper
 {
 	private function _array( $input )
 	{
-		if (is_object($input)) {
+		if ( is_object($input) ) {
 			$input = get_object_vars($input);
 		}
 
-		if (!is_array($input) && !($input instanceof \Traversable)) {
+		if ( !is_array($input) && !($input instanceof \Traversable) ) {
 			return '';
 		}
 
-		$is_assoc = $input !== array_values($input);
+		$associative = $input !== array_values($input);
 
 		$array = [];
 		foreach ( $input as $k => $v ) {
 			if ( is_array($v) ) {
-				$content = self::_array($v);
-			} elseif ( $is_assoc ) {
-				$content = '{"s.String":"'.$v.'"},{"s.String":"'.$k.'"}';
+				$content = $this->_array($v);
 			} else {
 				$content = '{"s.String":"'.$v.'"}';
+
+				if ( $associative ) {
+					$content .= ',{"s.String":"'.$k.'"}';
+				}
 			}
 
 			$array[] = '{"ArrayItem":['.$content.']}';
@@ -34,11 +36,11 @@ class Basic extends AbstractHelper
 
 	private function docbloc( $input )
 	{
-		if (is_object($input)) {
+		if ( is_object($input) ) {
 			$input = get_object_vars($input);
 		}
 
-		if (!is_array($input) && !($input instanceof \Traversable)) {
+		if ( !is_array($input) && !($input instanceof \Traversable) ) {
 			return '';
 		}
 

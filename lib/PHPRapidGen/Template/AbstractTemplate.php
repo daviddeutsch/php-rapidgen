@@ -13,6 +13,8 @@ class AbstractTemplate
 
 	public static function get( $template )
 	{
-
+		if ( strpos('.', $template) ) {
+			$rel = str_replace('.', '/', $template);
+		}
 	}
 }
