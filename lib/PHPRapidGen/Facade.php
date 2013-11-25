@@ -17,6 +17,20 @@ class Facade
 
 	static function context( $context )
 	{
+		foreach ( self::$parsers as $handle => $parser ) {
+			$parser->context($context);
+		}
+	}
+
+	static function batch( $array )
+	{
+		foreach ( $array as $target => $source ) {
+			self::convert($source, $target);
+		}
+	}
+
+	static function convert( $source, $target )
+	{
 
 	}
 

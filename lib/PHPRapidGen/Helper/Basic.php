@@ -49,7 +49,9 @@ class Basic extends AbstractHelper
 			$lines[] = ' * @'.$k.' '.$v;
 		}
 
-		return '{"Comment_Doc":["'."/**\n".implode("\n",$lines)."\n */".'"]}';
+		return '{"Comment_Doc":["'
+			. "/**\n" . implode("\n",$lines)
+			. "\n */" . '"]}';
 	}
 
 	private function concat( $input )
