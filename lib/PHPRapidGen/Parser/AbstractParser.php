@@ -4,8 +4,11 @@ namespace PHPRapidGen\Parser;
 
 abstract class AbstractParser
 {
-	public static $template;
-	public static $helper;
+	public $template;
+	public $helper;
+	public $context;
+
+	private $source;
 
 	private static $options = [];
 
@@ -17,26 +20,18 @@ abstract class AbstractParser
 			}
 		}
 
-		self::$template = new self::$options['template_class']();
-		self::$helper   = new self::$options['helper_class']();
+		$this->template = new self::$options['template_class']();
+		$this->helper   = new self::$options['helper_class']();
 	}
 
-	public function parse( $nodeset )
+	public function context( $context )
 	{
-		if ( is_array($nodeset) ) {
-			$array = [];
-			foreach ( $nodeset as $node ) {
-				$array[] = $this->parse($node);
-			}
+		$this->context = $context;
+	}
 
-			return $array;
-		}
-
-		if ( !is_object($nodeset) ) {
-			return $nodeset;
-		}
-
-		return $this->node( $nodeset );
+	public function parse( $source )
+	{
+		$this->source = $source;
 	}
 
 	private function node( $input )
