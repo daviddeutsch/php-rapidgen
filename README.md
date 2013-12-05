@@ -128,7 +128,7 @@ Notes:
 RapidGenerator::configure();
 
 RapidGenerator::context(
-	json_decode( file_get_contents(__DIR__.'/context.json')
+	json_decode( file_get_contents(__DIR__.'/context.json') )
 );
 
 RapidGenerator::convert(
