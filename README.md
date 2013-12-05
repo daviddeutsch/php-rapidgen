@@ -59,9 +59,9 @@ As an example, both the handlebars and the json file produce the same output.
 ```handlebars
 <?php
 {{#credits class.credits}}
-class processor_{{class.id}} extends {{class.parent}}
+class my_class_{{class.id}} extends {{class.parent}}
 {
-	public function info()
+	public function __construct()
 	{
 		return {{#array class.info}};
 	}
