@@ -4,14 +4,31 @@ namespace PHPRapidGen\Helper;
 
 class AbstractHelper
 {
-	public static function __call( $name, $args )
-	{
-		if ( method_exists( __CLASS__, $name ) ) {
-			return call_user_func( array( 'self', $name ), $args[0] );
-		} elseif ( method_exists( __CLASS__, '_'.$name ) ) {
-			return call_user_func( array( 'self', '_'.$name ), $args[0] );
-		}
+	protected $helpers = [];
 
-		return '';
+	public function __construct()
+	{
+		foreach ( get_class_methods($this) as $method ) {
+			if ( strpos($method, '__') === 0 ) continue;
+
+			if ( strpos($method, '_') === 0 ) {
+				$n = substr($method, 1);
+			} else {
+				$n = $method;
+			}
+
+			$helpers[$n] = $method;
+		}
+	}
+
+	public function __call( $name, $args )
+	{
+		if ( !in_array($name, $this->helpers) ) return null;
+
+		return call_user_func(
+			array( 'self', $this->helpers[$name] ),
+			$args[0]
+		);
+
 	}
 }

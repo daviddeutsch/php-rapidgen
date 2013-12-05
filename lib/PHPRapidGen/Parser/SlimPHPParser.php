@@ -5,8 +5,8 @@ namespace PHPRapidGen\Parser;
 class SlimPHPParser extends AbstractParser
 {
 	public $options = [
-		'helper_class' => 'Basic',
-		'template_class' => 'Template',
+		'helper_class' => 'Helper\Basic',
+		'template_class' => 'Helper\Template',
 	];
 
 	/**
@@ -39,6 +39,13 @@ class SlimPHPParser extends AbstractParser
 		$this->printer = new \PHPParser_PrettyPrinter_Default();
 	}
 
+	/**
+	 * Convert a JSON file path into PHP code
+	 *
+	 * @param $source string path to the json file
+	 *
+	 * @return string|void
+	 */
 	public function parse( $source )
 	{
 		return $this->parseJSON(
@@ -56,6 +63,7 @@ class SlimPHPParser extends AbstractParser
 	}
 
 	/**
+	 * Multi Node Resolution
 	 *
 	 * @param $item
 	 *
@@ -96,6 +104,7 @@ class SlimPHPParser extends AbstractParser
 	}
 
 	/**
+	 * Factory Node resolution
 	 *
 	 * @param $type
 	 * @param $item
