@@ -20,7 +20,17 @@ touch of dynamic replacements. PHP Parser is great for super-accurate generation
 of code.
 
 PHP-Rapidgen uses PHP-Parser as its native source, while also allowing for handlebars
-templates. Furthermore, you can mix and match them to your heart's content.
+templates. Furthermore, you can mix and match them to your heart's content with the
+one caveat that calling handlebars templates from within a PHP-Parser template
+can be quite resource intensive as it has to first convert the template back
+into a PHP-Parser AST.
+
+In general, it is preferable to work in this hierarchy:
+
+```
+output <-- handlebars.php (for simple stuff) <--- PHP-Parser (for complex stuff)
+                                              \-- Helpers (also based on PHP-Parser)
+```
 
 This is made possible by a canonical template traversal on the one hand (see below
 for examples). On the other hand, helpers are natively written in PHP-Parser Syntax
@@ -81,9 +91,11 @@ Notes:
 
 Notes:
 - The basic structure is always `{"command":[/* input */]}`
+- The input for each command corresponds with the PHP Parser method arguments
 - The dot notation emulates javascript syntax for object traversal
 - Shorthands are used extensively, ie. f is the `PHPParser_BuilderFactory`
-- The input for each command corresponds with the PHP Parser method arguments
+- `h` is for helpers, `c` is used to call from the context
+- `t` can be used to call in another template file
 
 *context.json*
 ```json
@@ -93,7 +105,7 @@ Notes:
 		"info": {
 			"name": "My Class",
 			"type": "a class"
-		}
+		},
 		"parent": "myparent",
 		"credits": {
 			"author": "David Deutsch",
