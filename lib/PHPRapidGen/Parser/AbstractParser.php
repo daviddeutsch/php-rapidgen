@@ -34,7 +34,7 @@ abstract class AbstractParser
 		$this->source = $source;
 	}
 
-	private function node( $input )
+	protected function node( $input )
 	{
 		return (string) $input;
 	}

@@ -4,20 +4,27 @@ namespace PHPRapidGen;
 
 class Facade
 {
-	private static $parsers;
+	/**
+	 * @var array|Parser\AbstractParser
+	 */
+	private static $types = [
+		'php' => 'Parser\PHPParser',
+		'json' => 'Parser\SlimPHPParser',
+		'handlebars' => 'Parser\Handlebars'
+	];
+
+	private static $parsers = [];
 
 	static function configure()
 	{
-		self::$parsers = (object) [
-			'php' => new Parser\PHPParser(),
-			'json' => new Parser\SlimPHPParser(),
-			'handlebars' => new Parser\Handlebars()
-		];
+		foreach ( self::$types as $extension => $class ) {
+			self::$parsers[$extension] = new $class();
+		}
 	}
 
 	static function context( $context )
 	{
-		foreach ( self::$parsers as $handle => $parser ) {
+		foreach ( self::$parsers as $parser ) {
 			$parser->context($context);
 		}
 	}
