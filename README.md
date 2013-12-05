@@ -3,16 +3,17 @@ PHP-Rapidgen
 
 ### Why?
 
-PHP Parser is an awesome tool but falls a little flat in the code generation area.
-The templating is basic and the syntax in general is quite verbose. Not something
-you'd want to hand-write or maintain. Also, for some cases, you need a stupid,
-fast fallback.
+[PHP-Parser](https://github.com/nikic/PHP-Parser) is an awesome tool but falls a
+little flat in the code generation area. The templating is basic and the syntax
+in general is quite verbose. Not something you'd want to hand-write or maintain.
+Also, for some cases, you need a stupid but fast fallback.
 
 ### How?
 
 PHP-Rapidgen does two things:
 
-1. Mix PHP-Parser and handlebars.php, with canonical template traversal, helpers
+1. Mix PHP-Parser and [handlebars.php](https://github.com/XaminProject/handlebars.php),
+with canonical template traversal, helpers
 2. Introduce a Shorthand JSON syntax for PHP Parser
 
 Handlebars is a great way to write a lot of static code that might need just a
