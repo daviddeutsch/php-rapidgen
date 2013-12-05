@@ -39,6 +39,9 @@ for examples). On the other hand, helpers are natively written in PHP-Parser Syn
 Finally, PHP-Rapidgen also handles context canonically such that both handlebars
 and PHP-Parser derive data from the same source.
 
+Example
+=======
+
 *Your Project*
 ```
 project
