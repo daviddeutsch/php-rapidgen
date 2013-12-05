@@ -80,7 +80,9 @@ Notes:
 		{"h.concat":["my_class_",{"c":"class.id"}]},
 		{
 			"stmts":[
-				{"f.method":["__construct",{"stmts":[{"st.Return":[{"h.array":{"c":"class.info"}}]}]}]},
+				{"f.method":["__construct",{"stmts":[
+					{"st.Return":[{"h.array":{"c":"class.info"}}]}
+				]}]},
 			],
 			"extend":{"c":"class.parent"}
 		},
