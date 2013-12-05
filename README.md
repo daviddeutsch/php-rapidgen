@@ -30,7 +30,7 @@ Finally, PHP-Rapidgen also handles context canonically such that both handlebars
 and PHP-Parser derive data from the same source.
 
 *Your Project*
-´´´
+```
 project
 |-- templates
 |    |-- main.handlebars
@@ -38,12 +38,12 @@ project
 |    +-- simple.php
 |-- context.json
 +-- generate.php
-´´´
+```
 
 As an example, both the handlebars and the json file produce the same output.
 
 *main.handlebars*
-´´´handlebars
+```handlebars
 <?php
 {{#credits class.credits}}
 class processor_{{class.id}} extends {{class.parent}}
@@ -53,14 +53,14 @@ class processor_{{class.id}} extends {{class.parent}}
 		return {{#array class.info}};
 	}
 }
-´´´
+```
 
 Notes:
-- #array calls on the same canonical helper as '{"h.array":...}' below
+- #array calls on the same canonical helper as `{"h.array":...}` below
 - The main benefit here is object traversal when compared to native PHP-Parser templates
 
 *main.json*
-´´´json
+```json
 [
 {
 	"f.class":[
@@ -77,16 +77,16 @@ Notes:
 	]
 }
 ]
-´´´
+```
 
 Notes:
-- The basic structure is always '{"command":[/* input */]}'
+- The basic structure is always `{"command":[/* input */]}`
 - The dot notation emulates javascript syntax for object traversal
-- Shorthands are used extensively, ie. f is the 'PHPParser_BuilderFactory'
+- Shorthands are used extensively, ie. f is the `PHPParser_BuilderFactory`
 - The input for each command corresponds with the PHP Parser method arguments
 
 *context.json*
-´´´json
+```json
 {
 	"class": {
 		"id": "myname",
@@ -103,10 +103,10 @@ Notes:
 		}
 	}
 }
-´´´
+```
 
 *generate.php*
-´´´php
+```php
 RapidGenerator::configure();
 
 RapidGenerator::context(
@@ -117,4 +117,4 @@ RapidGenerator::convert(
 	__DIR__.'/templates/main.json',
 	__DIR__.'/output.php'
 )
-´´´
+```
