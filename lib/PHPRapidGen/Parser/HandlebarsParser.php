@@ -1,11 +1,12 @@
 <?php
 
 namespace PHPRapidGen\Parser;
+use Handlebars\Handlebars;
 
-class Handlebars extends AbstractParser
+class HandlebarsParser extends AbstractParser
 {
 	/**
-	 * @var \Handlebars_Engine
+	 * @var Handlebars
 	 */
 	var $engine;
 
@@ -13,7 +14,7 @@ class Handlebars extends AbstractParser
 	{
 		parent::__construct($options);
 
-		$this->engine = new \Handlebars_Engine();
+		$this->engine = new Handlebars();
 	}
 
 	public function parse( $source )

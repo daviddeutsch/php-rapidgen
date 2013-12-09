@@ -78,7 +78,11 @@ class SlimPHPParser extends AbstractParser
 		$id = array_keys(get_object_vars($item))[0];
 
 		if ( strpos($id, '.') === false ) {
-			return $this->regularNode( $item, $id, 'Expr', $id );
+			if ( $id === 'c' ) {
+				return $this->resolveContext($item->$id);
+			} else {
+				return $this->regularNode( $item, $id, 'Expr', $id );
+			}
 		}
 
 		list($t, $c) = explode('.', $id, 2);
@@ -244,5 +248,30 @@ class SlimPHPParser extends AbstractParser
 		}
 
 		return new \ReflectionClass($name);
+	}
+
+	private function resolveContext( $key )
+	{
+		if ( !is_array( $key ) ) {
+			$key = explode( '.', $key );
+		}
+
+		if ( empty($key) ) return false;
+
+		$return = $this->context;
+
+		foreach ( $key as $k ) {
+			if ( is_object( $return ) ) {
+				if ( property_exists( $return, $k ) ) {
+					$return = $return->$k;
+				}
+			} elseif ( is_array( $return ) ) {
+				if ( isset( $return[$k] ) ) {
+					$return = $return[$k];
+				}
+			}
+		}
+
+		return $return;
 	}
 }

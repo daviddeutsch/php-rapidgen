@@ -5,14 +5,17 @@ namespace PHPRapidGen;
 class Facade
 {
 	/**
-	 * @var array|Parser\AbstractParser
+	 * @var array
 	 */
 	private static $types = [
-		'php' => 'Parser\PHPParser',
-		'json' => 'Parser\SlimPHPParser',
-		'handlebars' => 'Parser\Handlebars'
+		'php'        => 'Parser\PHPParser',
+		'json'       => 'Parser\SlimPHPParser',
+		'handlebars' => 'Parser\HandlebarsParser'
 	];
 
+	/**
+	 * @var array|Parser\AbstractParser
+	 */
 	private static $parsers = [];
 
 	static function configure()
