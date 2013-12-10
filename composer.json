@@ -15,5 +15,10 @@
 	"require":           {
 		"xamin/handlebars.php": "dev-master",
 		"nikic/php-parser":     "dev-master"
+	},
+	"autoload" : {
+		"psr-0" : {
+			"PHPRapidGen" : "src/"
+		}
 	}
 }
