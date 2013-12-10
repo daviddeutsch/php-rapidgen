@@ -13,12 +13,13 @@
 	"license":           "GPL-3.0+",
 	"minimum-stability": "dev",
 	"require":           {
+		"php": ">=5.3.2",
 		"xamin/handlebars.php": "dev-master",
 		"nikic/php-parser":     "dev-master"
 	},
 	"autoload" : {
 		"psr-0" : {
-			"PHPRapidGen" : "src/"
+			"PHPRapidGen" : "lib/"
 		}
 	}
 }
