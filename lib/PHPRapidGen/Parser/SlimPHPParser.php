@@ -53,9 +53,16 @@ class SlimPHPParser extends AbstractParser
 		);
 	}
 
-	public function parseJSON( $json, $nodes=[] )
+	/**
+	 *
+	 * @param mixed $tree
+	 * @param array $nodes
+	 *
+	 * @return string
+	 */
+	public function parseTree( $tree, $nodes=[] )
 	{
-		foreach ( $json as $node ) {
+		foreach ( $tree as $node ) {
 			$nodes[] = $this->node($node);
 		}
 
