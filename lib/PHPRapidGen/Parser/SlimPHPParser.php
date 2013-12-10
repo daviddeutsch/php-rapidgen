@@ -96,15 +96,15 @@ class SlimPHPParser extends AbstractParser
 
 		switch ( $t ) {
 			case 't':
-				return $this->template->{$c}( $item->$id );
+				return $this->template->{$c}($item->$id);
 
 				break;
 			case 'h':
-				return $this->helper->{$c}( $item->$id );
+				return $this->helper->{$c}($item->$id);
 
 				break;
 			case 'f':
-				return $this->factoryNode( $c, $item->$id );
+				return $this->factoryNode($c, $item->$id);
 
 				break;
 			default:
@@ -259,8 +259,8 @@ class SlimPHPParser extends AbstractParser
 
 	private function resolveContext( $key )
 	{
-		if ( !is_array( $key ) ) {
-			$key = explode( '.', $key );
+		if ( !is_array($key) ) {
+			$key = explode('.', $key);
 		}
 
 		if ( empty($key) ) return false;
@@ -268,12 +268,12 @@ class SlimPHPParser extends AbstractParser
 		$return = $this->context;
 
 		foreach ( $key as $k ) {
-			if ( is_object( $return ) ) {
-				if ( property_exists( $return, $k ) ) {
+			if ( is_object($return) ) {
+				if ( property_exists($return, $k) ) {
 					$return = $return->$k;
 				}
-			} elseif ( is_array( $return ) ) {
-				if ( isset( $return[$k] ) ) {
+			} elseif ( is_array($return) ) {
+				if ( isset($return[$k]) ) {
 					$return = $return[$k];
 				}
 			}

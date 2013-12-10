@@ -14,7 +14,7 @@ abstract class AbstractParser
 
 	public function __construct( $options=[] )
 	{
-		if ( !empty( $options ) ) {
+		if ( !empty($options) ) {
 			foreach ( $options as $k => $v ) {
 				self::$options[$k] = $v;
 			}
