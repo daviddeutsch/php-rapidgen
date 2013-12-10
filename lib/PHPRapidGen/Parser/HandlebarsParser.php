@@ -1,6 +1,7 @@
 <?php
 
 namespace PHPRapidGen\Parser;
+
 use Handlebars\Handlebars;
 
 class HandlebarsParser extends AbstractParser

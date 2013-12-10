@@ -2,15 +2,19 @@
 
 namespace PHPRapidGen;
 
+use PHPRapidGen\Parser\PHPParser;
+use PHPRapidGen\Parser\SlimPHPParser;
+use PHPRapidGen\Parser\HandlebarsParser;
+
 class Facade
 {
 	/**
 	 * @var array
 	 */
 	private static $types = [
-		'php'        => 'Parser\PHPParser',
-		'json'       => 'Parser\SlimPHPParser',
-		'handlebars' => 'Parser\HandlebarsParser'
+		'php'        => 'PHPParser',
+		'json'       => 'SlimPHPParser',
+		'handlebars' => 'HandlebarsParser'
 	];
 
 	/**
