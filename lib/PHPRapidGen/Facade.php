@@ -47,7 +47,9 @@ class Facade
 		$extension = pathinfo($source, PATHINFO_EXTENSION);
 
 		if ( !isset(self::$parsers[$extension]) ) {
-			return null;
+			copy($source, $target);
+
+			return;
 		}
 
 		self::$parsers[$extension]->parse($source);
