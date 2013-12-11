@@ -2,6 +2,9 @@
 
 namespace PHPRapidGen\Parser;
 
+//use PHPRapidGen\Helper\Template as TemplateHelper;
+use PHPRapidGen\Helper\Basic as BasicHelper;
+
 abstract class AbstractParser
 {
 	public $template;
@@ -10,7 +13,10 @@ abstract class AbstractParser
 
 	private $source;
 
-	private static $options = [];
+	private static $options = [
+		'helper_class' => '',
+		'template_class' => 'Helper\Template',
+	];
 
 	public function __construct( $options=[] )
 	{
@@ -20,8 +26,8 @@ abstract class AbstractParser
 			}
 		}
 
-		$this->template = new self::$options['template_class']();
-		$this->helper   = new self::$options['helper_class']();
+		//$this->template = new TemplateHelper;
+		$this->helper   = new BasicHelper;
 	}
 
 	public function context( $context )

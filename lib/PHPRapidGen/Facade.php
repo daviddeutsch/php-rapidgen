@@ -12,9 +12,9 @@ class Facade
 	 * @var array
 	 */
 	private static $types = [
-		'php'        => 'PHPParser',
-		'json'       => 'SlimPHPParser',
-		'handlebars' => 'HandlebarsParser'
+		'php'        => 'Parser\PHPParser',
+		'json'       => 'Parser\SlimPHPParser',
+		'handlebars' => 'Parser\HandlebarsParser'
 	];
 
 	/**
@@ -24,9 +24,8 @@ class Facade
 
 	static function configure()
 	{
-		foreach ( self::$types as $extension => $class ) {
-			self::$parsers[$extension] = new $class();
-		}
+		self::$parsers['json'] = new Parser\SlimPHPParser;
+		self::$parsers['handlebars'] = new Parser\HandlebarsParser;
 	}
 
 	static function context( $context )

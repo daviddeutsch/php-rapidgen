@@ -4,11 +4,6 @@ namespace PHPRapidGen\Parser;
 
 class SlimPHPParser extends AbstractParser
 {
-	public $options = [
-		'helper_class' => 'Helper\Basic',
-		'template_class' => 'Helper\Template',
-	];
-
 	/**
 	 * @var array shorthands for PHP Parser types
 	 */
