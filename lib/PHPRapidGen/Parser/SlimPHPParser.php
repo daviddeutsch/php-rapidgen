@@ -251,29 +251,4 @@ class SlimPHPParser extends AbstractParser
 
 		return new \ReflectionClass($name);
 	}
-
-	private function resolveContext( $key )
-	{
-		if ( !is_array($key) ) {
-			$key = explode('.', $key);
-		}
-
-		if ( empty($key) ) return false;
-
-		$return = $this->context;
-
-		foreach ( $key as $k ) {
-			if ( is_object($return) ) {
-				if ( property_exists($return, $k) ) {
-					$return = $return->$k;
-				}
-			} elseif ( is_array($return) ) {
-				if ( isset($return[$k]) ) {
-					$return = $return[$k];
-				}
-			}
-		}
-
-		return $return;
-	}
 }

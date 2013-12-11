@@ -22,9 +22,15 @@ class HandlebarsParser extends AbstractParser
 	{
 		parent::parse($source);
 
+		if ( !empty($this->context_partial) ) {
+			$context = $this->resolveContext($this->context_partial);
+		} else {
+			$context = $this->context;
+		}
+
 		return $this->engine->render(
 			basename($source, ".handlebars"),
-			$this->context
+			$context
 		);
 	}
 }
