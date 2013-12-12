@@ -19,8 +19,6 @@ abstract class AbstractParser
 
 	public $context;
 
-	public $context_partial;
-
 	private $source;
 
 	private static $options = [
@@ -45,12 +43,11 @@ abstract class AbstractParser
 
 	public function context( $context )
 	{
-		$this->context = $context;
-	}
-
-	public function contextPartial( $key )
-	{
-		$this->context_partial = $key;
+		if ( is_string($context) ) {
+			$this->context = $this->resolveContext($context);
+		} else {
+			$this->context = $context;
+		}
 	}
 
 	public function parse( $source )

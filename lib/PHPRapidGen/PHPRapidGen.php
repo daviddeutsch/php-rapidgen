@@ -10,10 +10,16 @@ class PHPRapidGen
 {
 	private $parsers = [];
 
-	public function __construct()
+	public function __construct( $context=null )
 	{
 		$this->parsers['json'] = new Parser\SlimPHPParser;
 		$this->parsers['handlebars'] = new Parser\HandlebarsParser;
+
+		if ( !empty($context) ) {
+			return $this->context($context);
+		}
+
+		return $this;
 	}
 
 	public function context( $context )
@@ -21,6 +27,8 @@ class PHPRapidGen
 		foreach ( $this->parsers as $parser ) {
 			$parser->context($context);
 		}
+
+		return $this;
 	}
 
 	public function contextPartial( $partial )

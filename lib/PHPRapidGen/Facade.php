@@ -3,25 +3,33 @@
 namespace PHPRapidGen;
 
 use PHPRapidGen\PHPRapidGen;
+use PHPRapidGen\GeneratorCascade;
 
 class Facade
 {
+	/**
+	 * @var GeneratorCascade;
+	 */
+	private static $cascade;
+
 	static function batch( $array, $context )
 	{
-		$generator = new PHPRapidGen;
+		if ( empty(self::$cascade) ) {
+			self::$cascade = new GeneratorCascade;
+		}
 
 		foreach ( $array as $target => $source ) {
-			self::convert($source, $target, $context, $generator);
+			self::convert($source, $target, $context);
 		}
 	}
 
-	static function convert( $source, $target, $context, $generator=null )
+	static function convert( $source, $target, $context )
 	{
-		if ( empty($generator) ) {
-			$generator = new PHPRapidGen;
+		if ( empty(self::$cascade) ) {
+			self::$cascade = new GeneratorCascade;
 		}
 
-		$generator->context($context);
+		self::$cascade->current()->context($context);
 
 		if ( is_array($source) ) {
 			$generator->partialContext($source[1]);
@@ -58,5 +66,13 @@ class Facade
 		}
 
 		return self::$parsers[$extension]->parse($source);
+	}
+
+	static function parseChild( $source, $context )
+	{
+		if ( empty(self::$cascade) ) {
+			self::$cascade = new GeneratorCascade;
+		}
+
 	}
 }
