@@ -8,14 +8,18 @@ class Facade
 {
 	static function batch( $array, $context )
 	{
+		$generator = new PHPRapidGen;
+
 		foreach ( $array as $target => $source ) {
-			self::convert($source, $target, $context);
+			self::convert($source, $target, $context, $generator);
 		}
 	}
 
-	static function convert( $source, $target, $context )
+	static function convert( $source, $target, $context, $generator=null )
 	{
-		$generator = new PHPRapidGen;
+		if ( empty($generator) ) {
+			$generator = new PHPRapidGen;
+		}
 
 		$generator->context($context);
 

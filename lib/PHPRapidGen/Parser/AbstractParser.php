@@ -38,8 +38,8 @@ abstract class AbstractParser
 
 		$this->helper = new BasicHelper;
 
-		$this->template = function( $template ) {
-			return RapidGenerator::parse($template);
+		$this->template = function( $template, $context ) {
+			return RapidGenerator::parseChild($template, $context);
 		};
 	}
 
