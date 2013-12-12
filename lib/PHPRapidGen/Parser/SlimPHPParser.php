@@ -91,7 +91,7 @@ class SlimPHPParser extends AbstractParser
 
 		switch ( $t ) {
 			case 't':
-				return $this->template->{$c}($item->$id);
+				return $this->template($item->$id);
 
 				break;
 			case 'h':

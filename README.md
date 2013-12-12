@@ -125,14 +125,11 @@ Notes:
 
 *generate.php*
 ```php
-RapidGenerator::configure();
-
-RapidGenerator::context(
-	json_decode( file_get_contents(__DIR__.'/context.json') )
-);
+use PHPRapidGen\Facade as RapidGenerator;
 
 RapidGenerator::convert(
 	__DIR__.'/templates/main.json',
-	__DIR__.'/output.php'
+	__DIR__.'/output.php',
+	json_decode( file_get_contents(__DIR__.'/context.json') )
 )
 ```

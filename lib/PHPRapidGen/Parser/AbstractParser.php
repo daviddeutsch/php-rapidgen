@@ -2,14 +2,23 @@
 
 namespace PHPRapidGen\Parser;
 
-//use PHPRapidGen\Helper\Template as TemplateHelper;
+use PHPRapidGen\Facade as RapidGenerator;
 use PHPRapidGen\Helper\Basic as BasicHelper;
 
 abstract class AbstractParser
 {
+	/**
+	 * @var callable
+	 */
 	public $template;
+
+	/**
+	 * @var \PHPRapidGen\Helper\Basic
+	 */
 	public $helper;
+
 	public $context;
+
 	public $context_partial;
 
 	private $source;
@@ -27,8 +36,11 @@ abstract class AbstractParser
 			}
 		}
 
-		//$this->template = new TemplateHelper;
 		$this->helper = new BasicHelper;
+
+		$this->template = function( $template ) {
+			return RapidGenerator::parse($template);
+		};
 	}
 
 	public function context( $context )
@@ -38,7 +50,7 @@ abstract class AbstractParser
 
 	public function contextPartial( $key )
 	{
-		$this->$context_partial = $key;
+		$this->context_partial = $key;
 	}
 
 	public function parse( $source )
