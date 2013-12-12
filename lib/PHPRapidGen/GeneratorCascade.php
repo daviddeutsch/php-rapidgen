@@ -2,8 +2,6 @@
 
 namespace PHPRapidGen;
 
-use PHPRapidGen\PHPRapidGen;
-
 class GeneratorCascade
 {
 	/**
