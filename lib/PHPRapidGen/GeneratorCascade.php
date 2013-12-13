@@ -2,53 +2,29 @@
 
 namespace PHPRapidGen;
 
-class GeneratorCascade
+class GeneratorCascade extends \ArrayIterator
 {
-	/**
-	 * @var array List of successive generators
-	 */
-	private static $cascade = [];
-
-	/**
-	 * @var int Pointer to current generator
-	 */
-	private static $pointer = 0;
-
-	public static function &start( $context=null )
+	public function __construct( $context=null )
 	{
-		if ( !empty(self::$cascade) ) {
-			self::$cascade = [];
-		}
-
-		self::$cascade[] = new PHPRapidGen($context);
-
-		return self::current();
+		parent::__construct( array(new PHPRapidGen($context)) );
 	}
 
 	/**
-	 * @return PHPRapidGen
-	 */
-	public static function &current()
-	{
-		if ( empty(self::$cascade[0]) ) {
-			self::$cascade[] = new PHPRapidGen;
-		}
-
-		return self::$cascade[self::$pointer];
-	}
-
-	/**
-	 * @param $context mixed Full context, or dot path to a context child item
+	 * Generate a new Generator entry that inherits from the previous one
+	 *
+	 * @param $context mixed New context, or dot path to child in last context
 	 *
 	 * @return PHPRapidGen
 	 */
-	public static function &child( $context )
+	public function append( $context=null )
 	{
-		self::$cascade[] = clone self::current();
+		parent::append( clone parent::current() );
 
-		self::$pointer++;
-
-		return self::current()->context($context);
+		if ( $context ) {
+			return parent::current()->context($context);
+		} else {
+			return parent::current();
+		}
 	}
 
 	/**
@@ -56,11 +32,9 @@ class GeneratorCascade
 	 *
 	 * @return PHPRapidGen
 	 */
-	public static function &parent()
+	public function pop()
 	{
-		array_pop(self::$cascade);
-
-		self::$pointer--;
+		array_pop($this);
 
 		return self::current();
 	}

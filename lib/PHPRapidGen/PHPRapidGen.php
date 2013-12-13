@@ -30,9 +30,4 @@ class PHPRapidGen
 
 		return $this;
 	}
-
-	public function contextPartial( $partial )
-	{
-		self::$parsers[$extension]->contextPartial($partial);
-	}
 }
