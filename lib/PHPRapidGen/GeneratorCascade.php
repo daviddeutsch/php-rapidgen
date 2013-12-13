@@ -30,6 +30,16 @@ class GeneratorCascade extends \ArrayIterator
 		}
 	}
 
+	/**
+	 * Shorten cascade by the last item
+	 *
+	 * @return PHPRapidGen
+	 */
+	public function pop()
+	{
+		return array_pop($this);
+	}
+
 	public function batch( $array, $context=null )
 	{
 		foreach ( $array as $target => $source ) {
@@ -50,16 +60,6 @@ class GeneratorCascade extends \ArrayIterator
 		parent::current()->convert($source, $target);
 
 		self::pop();
-	}
-
-	/**
-	 * Shorten cascade by the last item
-	 *
-	 * @return PHPRapidGen
-	 */
-	public function pop()
-	{
-		return array_pop($this);
 	}
 
 	public function parse( $source, $extension=null )

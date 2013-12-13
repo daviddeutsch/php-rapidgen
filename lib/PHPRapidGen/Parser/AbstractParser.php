@@ -17,6 +17,9 @@ abstract class AbstractParser
 	 */
 	public $helper;
 
+	/**
+	 * @var mixed
+	 */
 	public $context;
 
 	private $source;
@@ -40,6 +43,12 @@ abstract class AbstractParser
 		};
 	}
 
+	/**
+	 * Assign a context to this parser, or select a sub-context from the current
+	 * context
+	 *
+	 * @param mixed $context New context or a dot notation path to child context
+	 */
 	public function context( $context )
 	{
 		if ( is_string($context) ) {
@@ -49,6 +58,9 @@ abstract class AbstractParser
 		}
 	}
 
+	/**
+	 * @param $source
+	 */
 	public function parse( $source )
 	{
 		$this->source = $source;

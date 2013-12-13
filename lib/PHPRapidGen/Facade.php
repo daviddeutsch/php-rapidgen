@@ -29,9 +29,10 @@ class Facade
 	}
 
 	/**
-	 * @param string $source
-	 * @param mixed  $target
-	 * @param null   $context
+	 * @param string $source  Path to source file
+	 * @param mixed  $target  Path to desired target file
+	 * @param mixed  $context Context object or array, or dot notation path
+	 *                        to child context
 	 *
 	 * @return mixed
 	 */
