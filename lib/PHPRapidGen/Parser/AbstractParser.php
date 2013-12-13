@@ -22,8 +22,7 @@ abstract class AbstractParser
 	private $source;
 
 	private static $options = [
-		'helper_class' => '',
-		'template_class' => 'Helper\Template',
+		'helper_class' => ''
 	];
 
 	public function __construct( $options=[] )

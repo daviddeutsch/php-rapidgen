@@ -30,4 +30,35 @@ class PHPRapidGen
 
 		return $this;
 	}
+
+	public function convert($source, $target)
+	{
+		$info = pathinfo($source);
+
+		$extension = $info['extension'];
+
+		if ( !isset($this->parsers[$extension]) ) {
+			copy($source, $target);
+
+			return;
+		}
+
+		$source = pathinfo($source, PATHINFO_FILENAME);
+
+		return self::parse(
+			$info['filename'],
+			$extension
+		);
+	}
+
+
+	static function parse( $source, $extension=null )
+	{
+		if ( empty($extension) ) {
+
+		}
+
+		return self::$parsers[$extension]->parse($source);
+	}
+
 }

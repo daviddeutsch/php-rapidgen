@@ -4,15 +4,20 @@ namespace PHPRapidGen;
 
 class GeneratorCascade extends \ArrayIterator
 {
+	/**
+	 * Creates a new cascade
+	 *
+	 * @param mixed $context Context object, array or null
+	 */
 	public function __construct( $context=null )
 	{
-		parent::__construct( array(new PHPRapidGen($context)) );
+		return parent::__construct( array(new PHPRapidGen($context)) );
 	}
 
 	/**
 	 * Generate a new Generator entry that inherits from the previous one
 	 *
-	 * @param $context mixed New context, or dot path to child in last context
+	 * @param mixed $context New context, or dot path to child in last context
 	 *
 	 * @return PHPRapidGen
 	 */
@@ -20,22 +25,49 @@ class GeneratorCascade extends \ArrayIterator
 	{
 		parent::append( clone parent::current() );
 
-		if ( $context ) {
-			return parent::current()->context($context);
-		} else {
-			return parent::current();
+		if ( !empty($context) ) {
+			parent::current()->context($context);
 		}
 	}
 
+	public function batch( $array, $context=null )
+	{
+		foreach ( $array as $target => $source ) {
+			self::convert($target, $source, $context);
+		}
+	}
+
+	function convert( $target, $source, $context=null )
+	{
+		if ( is_array($source) ) {
+			$this->append($source[1]);
+
+			$source = $source[0];
+		} else {
+			$this->append($context);
+		}
+
+		parent::current()->convert($source, $target);
+
+		self::pop();
+	}
+
 	/**
-	 * Step out of and remove child generator
+	 * Shorten cascade by the last item
 	 *
 	 * @return PHPRapidGen
 	 */
 	public function pop()
 	{
-		array_pop($this);
+		return array_pop($this);
+	}
 
-		return self::current();
+	public function parse( $source, $extension=null )
+	{
+		if ( empty($extension) ) {
+
+		}
+
+		return self::$parsers[$extension]->parse($source);
 	}
 }
