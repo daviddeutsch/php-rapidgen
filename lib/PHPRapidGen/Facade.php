@@ -29,15 +29,22 @@ class Facade
 	}
 
 	/**
-	 * @param string $source  Path to source file
+	 * Convert one target from one source
+	 *
 	 * @param mixed  $target  Path to desired target file
+	 * @param string $source  Path to source file
 	 * @param mixed  $context Context object or array, or dot notation path
 	 *                        to child context
 	 *
 	 * @return mixed
 	 */
-	static function convert( $source, $target, $context=null )
+	static function convert( $target, $source, $context=null )
 	{
-		self::$cascade->convert($source, $target, $context);
+		self::$cascade->convert($target, $source, $context);
+	}
+
+	static function helpers( $helpers )
+	{
+		// TODO;
 	}
 }

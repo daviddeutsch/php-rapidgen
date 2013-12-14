@@ -2,8 +2,6 @@
 
 namespace PHPRapidGen\Helper;
 
-use PHPRapidGen\Helper\AbstractHelper;
-
 class Basic extends AbstractHelper
 {
 	private function _array( $input )
